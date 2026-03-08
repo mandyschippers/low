@@ -71,51 +71,41 @@ function QuestRow({ ranked, maxScore, showLordBonus }: { ranked: RankedQuest; ma
         className="w-full text-left px-3 py-2 hover:bg-mid-purple/60 transition-colors"
         onClick={() => setExpanded(e => !e)}
       >
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Rank */}
-          <span className="text-parchment/40 text-xs w-6 flex-shrink-0 text-right">#{rank}</span>
-
-          {/* Tier badge */}
-          <span className={`text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0 ${TIER_CLASSES[tier]}`}>
-            {tier}
-          </span>
-
-          {/* Quest name */}
-          <span className="font-medium text-sm text-parchment flex-1 min-w-0">
-            {quest.name}
-            {quest.isPlot && (
-              <span className="ml-1.5 text-xs text-gold/70 border border-gold/40 px-1 py-0.5 rounded">Plot</span>
-            )}
-          </span>
-
-          {/* Type chip */}
-          <span className={`text-xs px-1.5 py-0.5 rounded border flex-shrink-0 ${QUEST_TYPE_CHIP[quest.type]}`}>
-            {quest.type}
-          </span>
-
-          {/* Cost */}
-          <div className="flex-shrink-0">
-            <CostDisplay cost={quest.cost} />
+        <div className="flex flex-col gap-1">
+          {/* Row 1: rank, tier, name, chevron */}
+          <div className="flex items-center gap-2">
+            <span className="text-parchment/40 text-xs w-6 flex-shrink-0 text-right">#{rank}</span>
+            <span className={`text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0 ${TIER_CLASSES[tier]}`}>
+              {tier}
+            </span>
+            <span className="font-medium text-sm text-parchment flex-1 min-w-0 truncate">
+              {quest.name}
+              {quest.isPlot && (
+                <span className="ml-1.5 text-xs text-gold/70 border border-gold/40 px-1 py-0.5 rounded">Plot</span>
+              )}
+            </span>
+            <span className="text-parchment/30 text-xs flex-shrink-0">{expanded ? '▲' : '▼'}</span>
           </div>
 
-          {/* VP */}
-          <span className="text-xs text-parchment/60 flex-shrink-0 w-12 text-right">
-            {quest.vp} VP
-            {showLordBonus && lordBonusVP > 0 && (
-              <span className="text-green-400"> +{lordBonusVP}</span>
-            )}
-          </span>
-
-          {/* Score bar */}
-          <ScoreBar score={score} maxScore={maxScore} />
-
-          {/* Score number */}
-          <span className="text-xs text-parchment/40 w-8 text-right flex-shrink-0">
-            {score.toFixed(1)}
-          </span>
-
-          {/* Expand chevron */}
-          <span className="text-parchment/30 text-xs flex-shrink-0">{expanded ? '▲' : '▼'}</span>
+          {/* Row 2: type, cost, VP, score */}
+          <div className="flex items-center gap-2 pl-8 flex-wrap">
+            <span className={`text-xs px-1.5 py-0.5 rounded border flex-shrink-0 ${QUEST_TYPE_CHIP[quest.type]}`}>
+              {quest.type}
+            </span>
+            <div className="flex-shrink-0">
+              <CostDisplay cost={quest.cost} />
+            </div>
+            <span className="text-xs text-parchment/60 flex-shrink-0 ml-auto">
+              {quest.vp} VP
+              {showLordBonus && lordBonusVP > 0 && (
+                <span className="text-green-400"> +{lordBonusVP}</span>
+              )}
+            </span>
+            <ScoreBar score={score} maxScore={maxScore} />
+            <span className="text-xs text-parchment/40 w-8 text-right flex-shrink-0">
+              {score.toFixed(1)}
+            </span>
+          </div>
         </div>
       </button>
 
