@@ -147,13 +147,19 @@ export function QuestRanker({ lord, scarcity }: Props) {
   const [useCurrentScarcity, setUseCurrentScarcity] = useState(true)
   const [typeFilter, setTypeFilter] = useState<QuestType | 'all'>('all')
   const [plotFilter, setPlotFilter] = useState<'all' | 'plot' | 'regular'>('all')
+  const [expansionFilter, setExpansionFilter] = useState<'all' | 'base'>('all')
 
   const isLarissa = lord?.scoring.kind === 'buildings'
   const effectiveLord = includeLordBonus && !isLarissa ? lord : null
 
+  const questPool = useMemo(
+    () => expansionFilter === 'base' ? QUESTS.filter(q => q.expansion === 'base') : QUESTS,
+    [expansionFilter],
+  )
+
   const ranked = useMemo(
-    () => rankQuests(QUESTS, effectiveLord, scarcity, { includeLordBonus, useCurrentScarcity }),
-    [effectiveLord, scarcity, includeLordBonus, useCurrentScarcity],
+    () => rankQuests(questPool, effectiveLord, scarcity, { includeLordBonus, useCurrentScarcity }),
+    [questPool, effectiveLord, scarcity, includeLordBonus, useCurrentScarcity],
   )
 
   const maxScore = useMemo(() => Math.max(...ranked.map(r => r.score), 1), [ranked])
@@ -209,6 +215,32 @@ export function QuestRanker({ lord, scarcity }: Props) {
               All Normal
             </button>
           </div>
+        </div>
+
+        {/* Expansion filter */}
+        <div className="flex gap-1">
+          <button
+            onClick={() => setExpansionFilter('base')}
+            className={[
+              'px-2 py-1 text-xs rounded border transition-colors',
+              expansionFilter === 'base'
+                ? 'bg-gold/20 border-gold/60 text-gold'
+                : 'border-light-purple/40 text-parchment/50 hover:text-parchment/70',
+            ].join(' ')}
+          >
+            Base Only
+          </button>
+          <button
+            onClick={() => setExpansionFilter('all')}
+            className={[
+              'px-2 py-1 text-xs rounded border transition-colors',
+              expansionFilter === 'all'
+                ? 'bg-gold/20 border-gold/60 text-gold'
+                : 'border-light-purple/40 text-parchment/50 hover:text-parchment/70',
+            ].join(' ')}
+          >
+            Base + Undermountain
+          </button>
         </div>
 
         {/* Type filter */}
