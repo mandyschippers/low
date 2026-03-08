@@ -246,7 +246,8 @@ export function computeStrategy(lord: Lord, scarcity: ScarcityMap): StrategyRepo
   let firstType = type1
   let secondType = type2
   if (res1 && res2 && isScarce(scarcity[res1]) && !isScarce(scarcity[res2])) {
-    // res2 is easier — prioritize it but still seek res1 early
+    firstType = type2
+    secondType = type1
   } else if (res1 && res2 && !isScarce(scarcity[res1]) && isScarce(scarcity[res2])) {
     firstType = type2
     secondType = type1

@@ -13,14 +13,14 @@ export const LORDS: Lord[] = [
     id: 'caladorn',
     name: 'Caladorn Cassalanter',
     expansion: 'base',
-    scoring: { kind: 'dual-quest', types: ['Skullduggery', 'Warfare'], vpPerQuest: 4 },
+    scoring: { kind: 'dual-quest', types: ['Warfare', 'Skullduggery'], vpPerQuest: 4 },
     bonusDescription: '+4 VP for each Skullduggery quest and each Warfare quest completed',
   },
   {
     id: 'durnan',
     name: 'Durnan "the Wanderer"',
     expansion: 'base',
-    scoring: { kind: 'dual-quest', types: ['Commerce', 'Warfare'], vpPerQuest: 4 },
+    scoring: { kind: 'dual-quest', types: ['Warfare', 'Commerce'], vpPerQuest: 4 },
     bonusDescription: '+4 VP for each Commerce quest and each Warfare quest completed',
   },
   {
@@ -34,7 +34,7 @@ export const LORDS: Lord[] = [
     id: 'khelben',
     name: 'Khelben "Blackstaff" Arunsun',
     expansion: 'base',
-    scoring: { kind: 'dual-quest', types: ['Arcana', 'Warfare'], vpPerQuest: 4 },
+    scoring: { kind: 'dual-quest', types: ['Warfare', 'Arcana'], vpPerQuest: 4 },
     bonusDescription: '+4 VP for each Arcana quest and each Warfare quest completed',
   },
   {
@@ -69,7 +69,7 @@ export const LORDS: Lord[] = [
     id: 'piergeiron',
     name: 'Piergeiron the Paladinson',
     expansion: 'base',
-    scoring: { kind: 'dual-quest', types: ['Piety', 'Warfare'], vpPerQuest: 4 },
+    scoring: { kind: 'dual-quest', types: ['Warfare', 'Piety'], vpPerQuest: 4 },
     bonusDescription: '+4 VP for each Piety quest and each Warfare quest completed',
   },
   {

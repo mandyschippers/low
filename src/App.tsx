@@ -5,6 +5,7 @@ import { LordSelector } from './components/LordSelector'
 import { ResourcePanel } from './components/ResourcePanel'
 import { StrategyDisplay } from './components/StrategyDisplay'
 import { QuestRanker } from './components/QuestRanker'
+import { GameGuide } from './components/GameGuide'
 import { TabNav } from './components/TabNav'
 import { computeStrategy } from './engine/strategy'
 
@@ -19,7 +20,7 @@ const DEFAULT_SCARCITY: ScarcityMap = {
 export default function App() {
   const [selectedLord, setSelectedLord] = useState<Lord>(LORDS[0])
   const [scarcity, setScarcity] = useState<ScarcityMap>(DEFAULT_SCARCITY)
-  const [activeTab, setActiveTab] = useState<'strategy' | 'ranker'>('strategy')
+  const [activeTab, setActiveTab] = useState<'strategy' | 'ranker' | 'guide'>('strategy')
 
   function handleScarcityChange(resource: ResourceType, level: ScarcityLevel) {
     setScarcity(prev => ({ ...prev, [resource]: level }))
@@ -64,6 +65,7 @@ export default function App() {
               tabs={[
                 { id: 'strategy', label: 'Strategy Advisor' },
                 { id: 'ranker', label: 'Quest Ranker' },
+                { id: 'guide', label: 'Game Guide' },
               ]}
               active={activeTab}
               onChange={setActiveTab}
@@ -76,6 +78,7 @@ export default function App() {
           <div className="mt-5">
             {activeTab === 'strategy' && <StrategyDisplay report={report} />}
             {activeTab === 'ranker' && <QuestRanker lord={selectedLord} scarcity={scarcity} />}
+            {activeTab === 'guide' && <GameGuide />}
           </div>
         </main>
 
