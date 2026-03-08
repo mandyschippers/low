@@ -44,13 +44,13 @@ export function ResourcePanel({ scarcity, onChange }: Props) {
               />
               <span className="text-parchment text-sm font-medium">{RESOURCE_LABELS[resource]}</span>
             </div>
-            <div className="flex gap-1 flex-1">
+            <div className="flex gap-1 flex-1 min-w-0">
               {LEVELS.map(level => (
                 <button
                   key={level}
                   onClick={() => onChange(resource, level)}
                   className={`
-                    flex-1 py-1 px-2 rounded border text-xs font-medium transition-all
+                    flex-1 min-w-0 py-1 px-2 rounded border text-xs font-medium transition-all truncate
                     ${LEVEL_STYLES[level]}
                     ${scarcity[resource] === level ? LEVEL_ACTIVE_STYLES[level] : 'opacity-40 hover:opacity-70'}
                   `}
